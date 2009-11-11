@@ -29,4 +29,41 @@ for char in target:
     result += char
 
 # Here's the answer.
-print(result)
+print('Method 1:\n {0} \n -----'.format(result))
+
+# But let's face it, that's boring.  We can do this in a more 
+# information agnostic way.
+charfreq = {}
+for char in target:
+  if char in charfreq.keys():
+    charfreq[char] += 1
+  elif char not in charfreq.keys():
+    charfreq[char] = 1
+
+def mean(seq):
+  result = 0.0
+  for i in seq:
+    result += i
+  return result / len(seq)
+
+def sd(seq):
+  instmean = mean(seq)
+  result = 0.0
+  for i in seq:
+    result += (i - instmean)**2
+  return (1/len(seq)*result)**0.5
+
+# Now prune any escape sequences, as they are clearly not what we 
+# care about.
+del charfreq['\n']
+
+# We'll define the 'rare' characters as having frequencies less
+# than one standard deviation below the mean frequency.  
+rare = [char for char in charfreq.keys() if charfreq[char] < ( mean(charfreq.values()) - sd(charfreq.values()) ) ] 
+
+# Now iterate through the text, matching rare characters and 
+# building a string.
+result = ''
+for char in target:
+  if char in rare:
+    result += char
