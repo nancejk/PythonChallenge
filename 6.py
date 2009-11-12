@@ -17,7 +17,10 @@ while True:
   objname = str(suffix) + '.txt'
   # Open the temporary file object from the zip archive.
   tempf = zobj.open(objname).read().decode()
-  # As instructed, add the comment to the string.
+  # As instructed, add the comment to the string.  If you're
+  # wondering where you are instructed to do this, print out
+  # the result of following the linked list each time, and 
+  # break if there's no number in the file.
   result += zobj.getinfo(objname).comment.decode()
   if target.match(tempf):
     # Look for the next target.
