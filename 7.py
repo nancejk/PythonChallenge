@@ -19,18 +19,15 @@ for value in range(xmax-1):
   if img.getpixel((value,greyband_y[0])) == img.getpixel((value+1,greyband_y[0])):
     greyband_x.append(value)
 
-# OK, not all of the greys even within the pixels will be even.  But from
-# neighbor to neighbor, there should be big differences, whereas within
-# they should be small.  So we can keep a running average, find the jumps,
-# and record the value at those jumps.
-# avg = ()
-# for index in range(len(greyband_x)):
-#  avg += img.getpixel((index,greyband_y[0]))
+# This basically just forms a list comprehension of all of the pixels in
+# the greyband_x, starting from 2 and then 9, 16, and so on (spaced by 7,
+# which is the pixel width approximately).
 greys = [img.getpixel((i,greyband_y[0]))[0] for i in [7*j + 2 for j in range(87)]]
+
+# Convert the intensities to characters.
 target = ''.join([chr(i) for i in greys])
 print(target)
 
 # The result is [105, 110, 116, 101, 103, 114, 105, 116, 121]
 result = [105, 110, 116, 101, 103, 114, 105, 116, 121]
 print(''.join([chr(i) for i in result]))
-
