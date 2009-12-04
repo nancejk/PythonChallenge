@@ -16,3 +16,4 @@ for line in urldata:
 
 print("un: " + bz2.decompress(eval("" + un + "")))
 print("pw: " + bz2.decompress(eval("" + pw + "")))
+  
