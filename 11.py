@@ -1,5 +1,5 @@
 from PIL import Image as im
-o = im.open('/Users/nancejk/Desktop/cave.jpg')
+o = im.open('cave.jpg')
 
 # Open two new images of the same size.
 n1 = im.new(o.mode,o.size)
